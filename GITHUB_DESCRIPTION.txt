@@ -1,0 +1,1 @@
+One-click PotPlayer yt-dlp installer for Chzzk, YouTube, Naver, and other supported URLs. Updates PotPlayer's yt-dlp extension and latest yt-dlp.exe from official GitHub sources.
