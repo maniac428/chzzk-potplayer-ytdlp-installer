@@ -15,16 +15,6 @@
 - 브라우저 광고 화면이나 플레이어 UI 없이 PotPlayer에서 보고 싶은 사람
 - 오래된 커뮤니티 글의 수동 설치 파일 대신 최신 `yt-dlp` 기반 파일을 쓰고 싶은 사람
 
-## 같이 쓰면 좋은 Chrome 확장
-
-Chrome에서 치지직/유튜브 링크를 더 편하게 PotPlayer로 넘기고 싶다면 아래 확장과 같이 쓰는 조합이 좋습니다.
-
-- [PotPlayer YouTube Shortcut, Open Links](https://chromewebstore.google.com/detail/potplayer-youtube-shortcu/cfdpeaefecdlkdlgdpjjllmhlnckcodp)
-
-이 확장은 Chrome의 버튼, 컨텍스트 메뉴, 중간 클릭 등을 통해 YouTube와 Twitch 같은 링크를 PotPlayer로 빠르게 열거나 추가하는 용도입니다. 이 저장소의 설치기는 PotPlayer 안쪽의 `yt-dlp` 해석 기능을 최신 상태로 맞춰주는 역할이므로, 둘을 같이 쓰면 “브라우저에서 링크 보내기 + PotPlayer에서 링크 해석하기” 흐름이 더 편해집니다.
-
-주의: 해당 Chrome 확장이 모든 치지직 링크를 보장해서 재생해주는 것은 아닙니다. 실제 재생 성공 여부는 PotPlayer의 yt-dlp 확장, 최신 `yt-dlp.exe`, 사이트 정책, 로그인/성인/지역 제한에 따라 달라질 수 있습니다.
-
 ## 설치되는 것
 
 - PotPlayer `Extension\Media\PlayParse` 폴더에 `MediaPlayParse - yt-dlp.as` 설치
@@ -85,23 +75,13 @@ C:\Program Files\DAUM\PotPlayer\Module\yt-dlp.exe
 
 ## Sweet Spot
 
-대부분의 한국 사용자에게는 **PotPlayer 64비트 + 이 설치기 + 최신 yt-dlp + 필요하면 PotPlayer YouTube Shortcut Chrome 확장** 조합이 가장 단순합니다. Streamlink나 별도 브릿지까지 얹는 방식은 버퍼/관리 포인트가 늘어날 수 있으므로, 치지직 링크를 PotPlayer로 여는 목적이라면 이 조합부터 시도하는 것이 비용 대비 효율이 좋습니다.
+대부분의 한국 사용자에게는 **PotPlayer 64비트 + 이 설치기 + 최신 yt-dlp** 조합이 가장 단순합니다. Streamlink나 별도 브릿지까지 얹는 방식은 버퍼/관리 포인트가 늘어날 수 있으므로, 치지직 링크를 PotPlayer로 여는 목적이라면 이 조합부터 시도하는 것이 비용 대비 효율이 좋습니다.
 
 ## English
 
 **PotPlayer yt-dlp Chzzk Installer** installs or updates PotPlayer's yt-dlp media parser extension from official GitHub sources.
 
 It is useful when old manual installation guides ship outdated files and Chzzk, YouTube, Naver, or other yt-dlp-supported URLs no longer open correctly in PotPlayer. For Korean Chzzk users, it can also be a simple external-player alternative when they do not want to install a separate browser high-quality/grid program or prefer watching outside the browser player.
-
-### Recommended Chrome Extension
-
-This project pairs well with the Chrome extension below:
-
-- [PotPlayer YouTube Shortcut, Open Links](https://chromewebstore.google.com/detail/potplayer-youtube-shortcu/cfdpeaefecdlkdlgdpjjllmhlnckcodp)
-
-The Chrome extension helps send links from the browser to PotPlayer. This installer keeps PotPlayer's yt-dlp parser and `yt-dlp.exe` up to date. Together, they make the workflow smoother: send the link from Chrome, then let PotPlayer parse it through yt-dlp.
-
-This does not guarantee every Chzzk URL will work. Playback still depends on PotPlayer, yt-dlp support, site policy changes, login/adult/region restrictions, and the quality actually provided by the stream.
 
 ### What It Installs
 
@@ -134,9 +114,9 @@ This does not guarantee every Chzzk URL will work. Playback still depends on Pot
 
 ## Search Keywords / 검색 키워드
 
-한국어: 치지직 팟플레이어, 치지직 고화질 팟플레이어, 치지직 광고 없이, 치지직 그리드 설치 없이, 치지직 링크 PotPlayer, 팟플레이어 yt-dlp, 치지직 yt-dlp, 네이버 치지직 PotPlayer, 유튜브 팟플레이어 링크 열기, PotPlayer YouTube Shortcut.
+한국어: 치지직 팟플레이어, 치지직 고화질 팟플레이어, 치지직 광고 없이, 치지직 그리드 설치 없이, 치지직 링크 PotPlayer, 팟플레이어 yt-dlp, 치지직 yt-dlp, 네이버 치지직 PotPlayer, 유튜브 팟플레이어 링크 열기.
 
-English: Chzzk PotPlayer, Chzzk high quality PotPlayer, Chzzk ad-free, Chzzk no grid, Chzzk link PotPlayer, PotPlayer yt-dlp, Chzzk yt-dlp, Naver Chzzk PotPlayer, YouTube PotPlayer URL, PotPlayer YouTube Shortcut.
+English: Chzzk PotPlayer, Chzzk high quality PotPlayer, Chzzk ad-free, Chzzk no grid, Chzzk link PotPlayer, PotPlayer yt-dlp, Chzzk yt-dlp, Naver Chzzk PotPlayer, YouTube PotPlayer URL.
 
 ## License
 
