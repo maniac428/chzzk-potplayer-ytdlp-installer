@@ -1,5 +1,10 @@
 # 치지직 팟플레이어 yt-dlp 설치기 - 광고/그리드 설치 없이 고화질 링크 열기
 
+관련 프로젝트:
+
+- 치지직 PotPlayer yt-dlp 설치용: [chzzk-potplayer-ytdlp-installer](https://github.com/maniac428/chzzk-potplayer-ytdlp-installer)
+- Twitch 720p/1080p 원본화질용: [twitch-potplayer-720p-fix](https://github.com/maniac428/twitch-potplayer-720p-fix)
+
 **치지직 팟플레이어 yt-dlp 설치기**는 치지직, YouTube, 네이버 등 `yt-dlp` 지원 링크를 PotPlayer에서 열 수 있게 해주는 원클릭 설치/업데이트 도구입니다. 오래된 커뮤니티 글의 수동 파일 복사 방식 대신, PotPlayer에 필요한 `yt-dlp` 재생 확장과 최신 `yt-dlp.exe`를 공식 GitHub 원본에서 받아 설치합니다.
 
 브라우저에서 치지직 고화질 재생을 위해 별도 고화질/그리드 프로그램 설치를 요구하거나 광고 화면이 거슬리는 환경이라면, 이 방식은 PotPlayer로 링크를 열어보는 간단한 대안이 될 수 있습니다.
@@ -37,8 +42,8 @@
 
 | 항목 | 링크 |
 | --- | --- |
-| 초보자용 ZIP | [potplayer-ytdlp-chzzk-installer-beginner.zip](https://github.com/maniac428/potplayer-ytdlp-chzzk-installer/releases/latest/download/potplayer-ytdlp-chzzk-installer-beginner.zip) |
-| 전체 저장소 ZIP | [main.zip](https://github.com/maniac428/potplayer-ytdlp-chzzk-installer/archive/refs/heads/main.zip) |
+| 초보자용 ZIP | [chzzk-potplayer-ytdlp-installer-beginner.zip](https://github.com/maniac428/chzzk-potplayer-ytdlp-installer/releases/latest/download/chzzk-potplayer-ytdlp-installer-beginner.zip) |
+| 전체 저장소 ZIP | [main.zip](https://github.com/maniac428/chzzk-potplayer-ytdlp-installer/archive/refs/heads/main.zip) |
 | PotPlayer 공식 페이지 | [potplayer.tv](https://potplayer.tv/) |
 | PotPlayer yt-dlp 확장 원본 | [hgcat-360/PotPlayer-Extension_yt-dlp](https://github.com/hgcat-360/PotPlayer-Extension_yt-dlp) |
 | yt-dlp 공식 릴리스 | [yt-dlp/yt-dlp releases](https://github.com/yt-dlp/yt-dlp/releases/latest) |
