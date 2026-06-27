@@ -1,1 +1,1 @@
-치지직 링크를 PotPlayer에서 열기 위한 yt-dlp 설치기. PotPlayer YouTube Shortcut Chrome 확장과 함께 쓰기 좋습니다.
+치지직 링크를 PotPlayer에서 열기 위한 Windows용 PotPlayer yt-dlp 설치기. 고화질, 광고 없는 외부 플레이어 시청, 그리드 설치 없는 대안을 원하는 사용자용.
