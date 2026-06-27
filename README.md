@@ -19,6 +19,7 @@
 
 - PotPlayer `Extension\Media\PlayParse` 폴더에 `MediaPlayParse - yt-dlp.as` 설치
 - PotPlayer `Module` 폴더에 최신 `yt-dlp.exe` 설치
+- PotPlayer 사용자 설정 `yt-dlp.ini`에 시청용 기본값 적용: `live_chat=0`, `reduce_formats=1`
 - 기존 파일은 `Backup_PotPlayer_yt-dlp_날짜` 폴더에 자동 백업
 - 설치 후 `chzzk:live`, `chzzk:video` 지원 여부 확인
 
@@ -56,6 +57,8 @@
 
 설치 확인만 하고 싶으면 `check-potplayer-ytdlp.cmd`를 실행하세요.
 
+설치기는 치지직 시청용으로 `live_chat=0`, `reduce_formats=1`을 자동 적용합니다. 라이브 채팅용 WebView2를 같이 띄우지 않고, 품질 후보 메뉴를 줄여 PotPlayer가 더 가볍게 열리도록 하기 위한 설정입니다.
+
 ## 중요한 오해 방지
 
 - 이 도구는 치지직 전용 불법 우회 도구가 아닙니다. PotPlayer에 yt-dlp 기반 URL 해석 확장을 설치하는 도구입니다.
@@ -73,6 +76,7 @@
 C:\Program Files\DAUM\PotPlayer\Extension\Media\PlayParse\MediaPlayParse - yt-dlp.as
 C:\Program Files\DAUM\PotPlayer\Extension\Media\PlayParse\yt-dlp_default.ini
 C:\Program Files\DAUM\PotPlayer\Module\yt-dlp.exe
+C:\Users\<name>\AppData\Roaming\PotPlayerMini64\Extension\Media\PlayParse\yt-dlp.ini
 ```
 
 ## Sweet Spot
@@ -90,6 +94,7 @@ It is useful when old manual installation guides ship outdated files and Chzzk, 
 - `MediaPlayParse - yt-dlp.as` into PotPlayer's `Extension\Media\PlayParse` folder
 - `yt-dlp_default.ini` and helper assets
 - Latest `yt-dlp.exe` into PotPlayer's `Module` folder
+- Viewing defaults in the PotPlayer user config: `live_chat=0`, `reduce_formats=1`
 - A timestamped backup of existing files
 
 ### Usage
@@ -102,6 +107,8 @@ It is useful when old manual installation guides ship outdated files and Chzzk, 
 6. Open a Chzzk, YouTube, Naver, or other supported URL in PotPlayer.
 
 For the most reliable flow, open the actual Chzzk page URL, such as `https://chzzk.naver.com/live/...` or `https://chzzk.naver.com/video/...`, directly in PotPlayer.
+
+The installer applies `live_chat=0` and `reduce_formats=1` for Chzzk viewing. This avoids opening the live-chat WebView2 path and keeps the PotPlayer quality menu lighter.
 
 ### Notes
 
