@@ -164,6 +164,75 @@ function Download-FileChecked {
     }
 }
 
+function Set-IniValue {
+    param(
+        [string]$Text,
+        [string]$Name,
+        [string]$Value
+    )
+
+    $pattern = "(?m)^" + [regex]::Escape($Name) + "=.*$"
+    if ($Text -match $pattern) {
+        return [regex]::Replace($Text, $pattern, "$Name=$Value")
+    }
+
+    return $Text.TrimEnd() + "`r`n$Name=$Value`r`n"
+}
+
+function Get-PotPlayerProfileNames {
+    param([string]$Root)
+
+    $names = New-Object System.Collections.Generic.List[string]
+
+    if ((Test-Path -LiteralPath (Join-Path $Root "PotPlayerMini64.exe")) -or
+        (Test-Path -LiteralPath (Join-Path $Root "PotPlayer64.exe"))) {
+        $names.Add("PotPlayerMini64")
+    }
+
+    if ((Test-Path -LiteralPath (Join-Path $Root "PotPlayerMini.exe")) -or
+        (Test-Path -LiteralPath (Join-Path $Root "PotPlayer.exe"))) {
+        $names.Add("PotPlayerMini")
+    }
+
+    if ($names.Count -eq 0) {
+        $names.Add("PotPlayerMini64")
+    }
+
+    return $names | Select-Object -Unique
+}
+
+function Set-ChzzkViewingDefaults {
+    param(
+        [string]$Root,
+        [string]$BackupRoot
+    )
+
+    $defaultConfig = Join-Path $Root "Extension\Media\PlayParse\yt-dlp_default.ini"
+    if (-not (Test-Path -LiteralPath $defaultConfig -PathType Leaf)) {
+        throw "Default yt-dlp config was not found: $defaultConfig"
+    }
+
+    foreach ($profileName in Get-PotPlayerProfileNames -Root $Root) {
+        $userConfigDir = Join-Path $env:APPDATA (Join-Path $profileName "Extension\Media\PlayParse")
+        $userConfig = Join-Path $userConfigDir "yt-dlp.ini"
+
+        New-Item -ItemType Directory -Path $userConfigDir -Force | Out-Null
+        Backup-ExistingFile -Path $userConfig -BackupRoot $BackupRoot
+
+        if (-not (Test-Path -LiteralPath $userConfig -PathType Leaf)) {
+            Copy-Item -LiteralPath $defaultConfig -Destination $userConfig -Force
+        }
+
+        $text = Get-Content -LiteralPath $userConfig -Raw
+        $text = Set-IniValue -Text $text -Name "live_chat" -Value "0"
+        $text = Set-IniValue -Text $text -Name "reduce_formats" -Value "1"
+        Set-Content -LiteralPath $userConfig -Value $text -Encoding UTF8
+
+        Write-Ok "Applied Chzzk viewing defaults: live_chat=0, reduce_formats=1"
+        Write-Info "User config: $userConfig"
+    }
+}
+
 try {
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 -bor
                                                    [Net.SecurityProtocolType]::Tls11 -bor
@@ -224,6 +293,8 @@ try {
         Backup-ExistingFile -Path $file.Destination -BackupRoot $backupRoot
         Download-FileChecked -Url $file.Url -Destination $file.Destination -MinBytes $file.MinBytes
     }
+
+    Set-ChzzkViewingDefaults -Root $root -BackupRoot $backupRoot
 
     $ytDlpExe = Join-Path $moduleDir "yt-dlp.exe"
     $version = (& $ytDlpExe --version) -join ""
