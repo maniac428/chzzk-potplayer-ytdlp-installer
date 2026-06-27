@@ -1,1 +1,1 @@
-치지직 팟플레이어 yt-dlp 설치기: 광고/그리드 설치 없이 Chzzk 링크를 PotPlayer에서 열기.
+치지직 링크를 PotPlayer에서 열기 위한 yt-dlp 설치기. PotPlayer YouTube Shortcut Chrome 확장과 함께 쓰기 좋습니다.

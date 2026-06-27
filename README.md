@@ -1,42 +1,45 @@
-# 치지직 팟플레이어 yt-dlp 설치기 - 광고/그리드 설치 없이 고화질 링크 열기
+# 치지직 팟플레이어 yt-dlp 설치기
+
+치지직, 유튜브, 네이버, 기타 `yt-dlp` 지원 링크를 PotPlayer에서 열 수 있도록 PotPlayer용 `yt-dlp` 재생 확장을 설치/업데이트하는 Windows용 도구입니다.
 
 관련 프로젝트:
 
-- 치지직 PotPlayer yt-dlp 설치용: [chzzk-potplayer-ytdlp-installer](https://github.com/maniac428/chzzk-potplayer-ytdlp-installer)
-- Twitch 720p/1080p 원본화질용: [twitch-potplayer-720p-fix](https://github.com/maniac428/twitch-potplayer-720p-fix)
+- 치지직 PotPlayer yt-dlp 설치기: [chzzk-potplayer-ytdlp-installer](https://github.com/maniac428/chzzk-potplayer-ytdlp-installer)
+- Twitch PotPlayer 720p Fix: [twitch-potplayer-720p-fix](https://github.com/maniac428/twitch-potplayer-720p-fix)
 
-**치지직 팟플레이어 yt-dlp 설치기**는 치지직, YouTube, 네이버 등 `yt-dlp` 지원 링크를 PotPlayer에서 열 수 있게 해주는 원클릭 설치/업데이트 도구입니다. 오래된 커뮤니티 글의 수동 파일 복사 방식 대신, PotPlayer에 필요한 `yt-dlp` 재생 확장과 최신 `yt-dlp.exe`를 공식 GitHub 원본에서 받아 설치합니다.
+## 이런 사람에게 추천
 
-브라우저에서 치지직 고화질 재생을 위해 별도 고화질/그리드 프로그램 설치를 요구하거나 광고 화면이 거슬리는 환경이라면, 이 방식은 PotPlayer로 링크를 열어보는 간단한 대안이 될 수 있습니다.
+- 치지직 링크를 PotPlayer에 붙여넣어 보고 싶은 사람
+- 브라우저 플레이어 대신 외부 플레이어로 보고 싶은 사람
+- 별도 고화질/그리드 프로그램 설치가 부담스러운 사람
+- 브라우저 광고 화면이나 플레이어 UI 없이 PotPlayer에서 보고 싶은 사람
+- 오래된 커뮤니티 글의 수동 설치 파일 대신 최신 `yt-dlp` 기반 파일을 쓰고 싶은 사람
 
-## 한국어
+## 같이 쓰면 좋은 Chrome 확장
 
-### 이게 하는 일
+Chrome에서 치지직/유튜브 링크를 더 편하게 PotPlayer로 넘기고 싶다면 아래 확장과 같이 쓰는 조합이 좋습니다.
 
-- PotPlayer의 `Extension\Media\PlayParse` 폴더에 `MediaPlayParse - yt-dlp.as` 확장을 설치합니다.
-- PotPlayer의 `Module` 폴더에 최신 `yt-dlp.exe`를 설치합니다.
-- 기존 파일은 `Backup_PotPlayer_yt-dlp_날짜` 폴더에 백업합니다.
-- 설치 후 `chzzk:live`, `chzzk:video` 지원 여부를 확인합니다.
+- [PotPlayer YouTube Shortcut, Open Links](https://chromewebstore.google.com/detail/potplayer-youtube-shortcu/cfdpeaefecdlkdlgdpjjllmhlnckcodp)
 
-### 장점
+이 확장은 Chrome의 버튼, 컨텍스트 메뉴, 중간 클릭 등을 통해 YouTube와 Twitch 같은 링크를 PotPlayer로 빠르게 열거나 추가하는 용도입니다. 이 저장소의 설치기는 PotPlayer 안쪽의 `yt-dlp` 해석 기능을 최신 상태로 맞춰주는 역할이므로, 둘을 같이 쓰면 “브라우저에서 링크 보내기 + PotPlayer에서 링크 해석하기” 흐름이 더 편해집니다.
 
-- 치지직 링크를 PotPlayer에 붙여넣어 외부 플레이어로 볼 수 있습니다.
-- 브라우저용 고화질/그리드 프로그램을 따로 설치하지 않고 시도할 수 있습니다.
-- 브라우저 플레이어 대신 PotPlayer로 열기 때문에 광고 화면이나 웹 플레이어 UI 없이 볼 수 있는 경우가 있습니다.
-- 예전 글에 첨부된 낡은 파일 대신 공식 최신 `yt-dlp.exe`를 받습니다.
+주의: 해당 Chrome 확장이 모든 치지직 링크를 보장해서 재생해주는 것은 아닙니다. 실제 재생 성공 여부는 PotPlayer의 yt-dlp 확장, 최신 `yt-dlp.exe`, 사이트 정책, 로그인/성인/지역 제한에 따라 달라질 수 있습니다.
+
+## 설치되는 것
+
+- PotPlayer `Extension\Media\PlayParse` 폴더에 `MediaPlayParse - yt-dlp.as` 설치
+- PotPlayer `Module` 폴더에 최신 `yt-dlp.exe` 설치
+- 기존 파일은 `Backup_PotPlayer_yt-dlp_날짜` 폴더에 자동 백업
+- 설치 후 `chzzk:live`, `chzzk:video` 지원 여부 확인
+
+## 장점
+
+- 공식 GitHub 원본에서 최신 파일을 받습니다.
 - 설치, 업데이트, 확인을 각각 `.cmd` 파일 하나로 처리합니다.
-- 기존 파일을 자동 백업하므로 문제가 생겨도 되돌리기 쉽습니다.
+- 기존 파일을 자동 백업하므로 문제가 생겼을 때 되돌리기 쉽습니다.
+- 치지직뿐 아니라 YouTube, Naver 등 yt-dlp 지원 사이트에도 활용할 수 있습니다.
 
-### 이런 사람에게 추천
-
-- 치지직 고화질을 보고 싶은데 별도 그리드 프로그램 설치가 부담스러운 사람
-- 치지직을 브라우저 광고 없이 PotPlayer로 보고 싶은 사람
-- 치지직 링크를 PotPlayer에 붙여넣어서 보고 싶은 사람
-- 예전 커뮤니티 글에 올라온 파일이 오래돼서 최신 치지직이 안 열리는 사람
-- YouTube, 네이버, 기타 yt-dlp 지원 사이트 링크를 PotPlayer에서 열고 싶은 사람
-- 랜덤 블로그/미러 파일 말고 공식 원본 기준으로 업데이트하고 싶은 사람
-
-### 다운로드
+## 다운로드
 
 초보자는 Releases에서 ZIP 파일을 받는 것을 권장합니다.
 
@@ -48,7 +51,7 @@
 | PotPlayer yt-dlp 확장 원본 | [hgcat-360/PotPlayer-Extension_yt-dlp](https://github.com/hgcat-360/PotPlayer-Extension_yt-dlp) |
 | yt-dlp 공식 릴리스 | [yt-dlp/yt-dlp releases](https://github.com/yt-dlp/yt-dlp/releases/latest) |
 
-### 사용법
+## 사용법
 
 1. PotPlayer를 종료합니다.
 2. ZIP을 다운로드하고 압축을 풉니다.
@@ -57,21 +60,20 @@
 5. 설치가 끝나면 PotPlayer를 다시 켭니다.
 6. PotPlayer에서 치지직 라이브/다시보기 URL을 열어봅니다.
 
-업데이트도 같습니다. `update-potplayer-ytdlp.cmd`를 실행하면 공식 최신 파일로 다시 덮어쓰고 기존 파일은 백업합니다.
+업데이트는 `update-potplayer-ytdlp.cmd`를 실행하면 됩니다. 최신 파일로 다시 받아오고 기존 파일은 백업합니다.
 
 설치 확인만 하고 싶으면 `check-potplayer-ytdlp.cmd`를 실행하세요.
 
-### 중요한 오해 방지
+## 중요한 오해 방지
 
 - 이 도구는 치지직 전용 불법 우회 도구가 아닙니다. PotPlayer에 yt-dlp 기반 URL 해석 확장을 설치하는 도구입니다.
 - “그리드 프로그램 없이 보기”는 PotPlayer에서 yt-dlp가 링크를 정상 해석할 때 가능한 대안입니다. 로그인, 성인 인증, 지역 제한, 사이트 정책 변경이 있으면 실패할 수 있습니다.
-- “광고 없이 보기”는 브라우저 플레이어 대신 PotPlayer로 열 때 광고 화면이 나오지 않는 경우를 설명한 것입니다. 플랫폼의 서버 삽입 광고, 정책 변경, 재생 방식 변경까지 영구적으로 보장하는 광고 차단 도구는 아닙니다.
-- 치지직 방송 자체가 낮은 화질이면 PotPlayer에서도 그 이상으로 올라가지 않습니다.
-- 성인/로그인/지역 제한이 걸린 영상은 yt-dlp가 URL을 못 풀 수 있습니다.
-- Twitch 720p/source quality 문제는 이 저장소의 목적이 아닙니다. Twitch 원본화질은 별도 방식이 필요합니다.
-- exe 파일을 랜덤 사이트에서 받지 마세요. 이 설치기는 PotPlayer 확장 원본 저장소와 yt-dlp 공식 릴리스만 사용합니다.
+- “광고 없이 보기”는 브라우저 플레이어 대신 PotPlayer로 열었을 때 광고 화면이나 웹 플레이어 UI가 나오지 않는 경우를 설명하는 것입니다. 플랫폼의 서버 삽입 광고, 정책 변경, 재생 방식 변경까지 영구적으로 막는 광고 차단 도구가 아닙니다.
+- 치지직 방송 자체가 특정 화질까지만 제공하면 PotPlayer에서도 그 이상으로 올라가지 않습니다.
+- Twitch 720p/source quality 문제 해결용 저장소가 아닙니다. Twitch 원본화질은 별도 방식이 필요합니다.
+- 출처 불명의 exe 설치기를 피하고 싶다면 이 저장소처럼 원본 저장소와 공식 yt-dlp 릴리스 기준으로 설치하는 편이 안전합니다.
 
-### 설치되는 위치
+## 설치 위치
 
 일반적인 64비트 PotPlayer 기준:
 
@@ -81,9 +83,9 @@ C:\Program Files\DAUM\PotPlayer\Extension\Media\PlayParse\yt-dlp_default.ini
 C:\Program Files\DAUM\PotPlayer\Module\yt-dlp.exe
 ```
 
-### Sweet Spot
+## Sweet Spot
 
-대부분의 한국 사용자에게는 **PotPlayer 64비트 + 이 설치기 + 최신 yt-dlp** 조합이 가장 단순합니다. 치지직 고화질/그리드 프로그램 설치가 싫거나 브라우저 광고 화면 없이 외부 플레이어로 보려는 목적이라면 먼저 이 방식부터 시도하는 것이 비용 대비 효율이 좋습니다. Streamlink까지 얹는 방식은 버퍼 옵션을 세밀하게 만질 수 있지만, 치지직 링크 붙여넣기만 목적이면 관리 포인트가 늘어납니다.
+대부분의 한국 사용자에게는 **PotPlayer 64비트 + 이 설치기 + 최신 yt-dlp + 필요하면 PotPlayer YouTube Shortcut Chrome 확장** 조합이 가장 단순합니다. Streamlink나 별도 브릿지까지 얹는 방식은 버퍼/관리 포인트가 늘어날 수 있으므로, 치지직 링크를 PotPlayer로 여는 목적이라면 이 조합부터 시도하는 것이 비용 대비 효율이 좋습니다.
 
 ## English
 
@@ -91,10 +93,20 @@ C:\Program Files\DAUM\PotPlayer\Module\yt-dlp.exe
 
 It is useful when old manual installation guides ship outdated files and Chzzk, YouTube, Naver, or other yt-dlp-supported URLs no longer open correctly in PotPlayer. For Korean Chzzk users, it can also be a simple external-player alternative when they do not want to install a separate browser high-quality/grid program or prefer watching outside the browser player.
 
+### Recommended Chrome Extension
+
+This project pairs well with the Chrome extension below:
+
+- [PotPlayer YouTube Shortcut, Open Links](https://chromewebstore.google.com/detail/potplayer-youtube-shortcu/cfdpeaefecdlkdlgdpjjllmhlnckcodp)
+
+The Chrome extension helps send links from the browser to PotPlayer. This installer keeps PotPlayer's yt-dlp parser and `yt-dlp.exe` up to date. Together, they make the workflow smoother: send the link from Chrome, then let PotPlayer parse it through yt-dlp.
+
+This does not guarantee every Chzzk URL will work. Playback still depends on PotPlayer, yt-dlp support, site policy changes, login/adult/region restrictions, and the quality actually provided by the stream.
+
 ### What It Installs
 
 - `MediaPlayParse - yt-dlp.as` into PotPlayer's `Extension\Media\PlayParse` folder
-- `yt-dlp_default.ini` and small helper assets
+- `yt-dlp_default.ini` and helper assets
 - Latest `yt-dlp.exe` into PotPlayer's `Module` folder
 - A timestamped backup of existing files
 
@@ -110,7 +122,7 @@ It is useful when old manual installation guides ship outdated files and Chzzk, 
 ### Notes
 
 - This is not a Twitch 720p/source-quality bypass.
-- This is not a guaranteed permanent ad blocker. It only sets up PotPlayer playback through yt-dlp-supported URLs.
+- This is not a guaranteed permanent ad blocker. It sets up PotPlayer playback through yt-dlp-supported URLs.
 - Login, adult, or region-restricted content may still fail.
 - The installer downloads only from official GitHub sources.
 
@@ -122,9 +134,9 @@ It is useful when old manual installation guides ship outdated files and Chzzk, 
 
 ## Search Keywords / 검색 키워드
 
-한국어: 치지직 팟플레이어, 치지직 고화질 팟플레이어, 치지직 광고 없이, 치지직 그리드 설치 없이, 치지직 링크 PotPlayer, 팟플레이어 yt-dlp, 치지직 yt-dlp, 네이버 치지직 PotPlayer, 유튜브 팟플레이어 링크 열기.
+한국어: 치지직 팟플레이어, 치지직 고화질 팟플레이어, 치지직 광고 없이, 치지직 그리드 설치 없이, 치지직 링크 PotPlayer, 팟플레이어 yt-dlp, 치지직 yt-dlp, 네이버 치지직 PotPlayer, 유튜브 팟플레이어 링크 열기, PotPlayer YouTube Shortcut.
 
-English: Chzzk PotPlayer, Chzzk high quality PotPlayer, Chzzk ad-free, Chzzk no grid, Chzzk link PotPlayer, PotPlayer yt-dlp, Chzzk yt-dlp, Naver Chzzk PotPlayer, YouTube PotPlayer URL.
+English: Chzzk PotPlayer, Chzzk high quality PotPlayer, Chzzk ad-free, Chzzk no grid, Chzzk link PotPlayer, PotPlayer yt-dlp, Chzzk yt-dlp, Naver Chzzk PotPlayer, YouTube PotPlayer URL, PotPlayer YouTube Shortcut.
 
 ## License
 
