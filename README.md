@@ -1,7 +1,5 @@
 # 치지직 팟플레이어 yt-dlp 설치기 - 광고/그리드 설치 없이 고화질 링크 열기
 
-치지직 팟플레이어, 치지직 고화질 팟플레이어, 치지직 광고 없이, 치지직 광고 없음, 팟플레이어 광고 없이, 치지직 그리드 설치 없이, 치지직 링크 PotPlayer, 팟플레이어 yt-dlp, 치지직 yt-dlp, 네이버 치지직 PotPlayer, Chzzk PotPlayer, 유튜브 팟플레이어 링크 열기.
-
 **치지직 팟플레이어 yt-dlp 설치기**는 치지직, YouTube, 네이버 등 `yt-dlp` 지원 링크를 PotPlayer에서 열 수 있게 해주는 원클릭 설치/업데이트 도구입니다. 오래된 커뮤니티 글의 수동 파일 복사 방식 대신, PotPlayer에 필요한 `yt-dlp` 재생 확장과 최신 `yt-dlp.exe`를 공식 GitHub 원본에서 받아 설치합니다.
 
 브라우저에서 치지직 고화질 재생을 위해 별도 고화질/그리드 프로그램 설치를 요구하거나 광고 화면이 거슬리는 환경이라면, 이 방식은 PotPlayer로 링크를 열어보는 간단한 대안이 될 수 있습니다.
@@ -116,6 +114,12 @@ It is useful when old manual installation guides ship outdated files and Chzzk, 
 - PotPlayer yt-dlp extension: [hgcat-360/PotPlayer-Extension_yt-dlp](https://github.com/hgcat-360/PotPlayer-Extension_yt-dlp)
 - yt-dlp official project: [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp)
 - yt-dlp supported sites: [supported sites](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)
+
+## Search Keywords / 검색 키워드
+
+한국어: 치지직 팟플레이어, 치지직 고화질 팟플레이어, 치지직 광고 없이, 치지직 그리드 설치 없이, 치지직 링크 PotPlayer, 팟플레이어 yt-dlp, 치지직 yt-dlp, 네이버 치지직 PotPlayer, 유튜브 팟플레이어 링크 열기.
+
+English: Chzzk PotPlayer, Chzzk high quality PotPlayer, Chzzk ad-free, Chzzk no grid, Chzzk link PotPlayer, PotPlayer yt-dlp, Chzzk yt-dlp, Naver Chzzk PotPlayer, YouTube PotPlayer URL.
 
 ## License
 
