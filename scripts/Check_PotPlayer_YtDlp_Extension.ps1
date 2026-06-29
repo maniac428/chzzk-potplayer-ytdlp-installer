@@ -142,6 +142,33 @@ try {
         }
     }
 
+    if (Test-Path -LiteralPath $extension -PathType Leaf) {
+        $extensionText = Get-Content -LiteralPath $extension -Raw
+        if ($extensionText -match 'tx\.findI\(log, "\[debug\] Command-line config:"\) < 0 && tx\.findI\(output, "\[debug\] Command-line config:"\) >= 0') {
+            Write-Host "[OK] yt-dlp log-order compatibility patch detected." -ForegroundColor Green
+        }
+        else {
+            Write-Host "[WARN] yt-dlp log-order compatibility patch was not detected." -ForegroundColor Yellow
+        }
+
+        if ($extensionText -match 'data\.find\("}\\r\\n", pos1\)') {
+            Write-Host "[OK] yt-dlp JSON line-ending compatibility patch detected." -ForegroundColor Green
+        }
+        else {
+            Write-Host "[WARN] yt-dlp JSON line-ending compatibility patch was not detected." -ForegroundColor Yellow
+        }
+
+        if ($extensionText -match 'bool _IsTwitchStreamlinkHlsUrl\(string url\)' -and
+            $extensionText -match '127' -and
+            $extensionText -match 'localhost' -and
+            $extensionText -match '_IsTwitchStreamlinkHlsUrl\(url\)') {
+            Write-Host "[OK] Twitch Streamlink HLS/local HTTP passthrough patch detected." -ForegroundColor Green
+        }
+        else {
+            Write-Host "[WARN] Twitch Streamlink HLS/local HTTP passthrough patch was not detected." -ForegroundColor Yellow
+        }
+    }
+
     Write-Host ""
     foreach ($profileName in Get-PotPlayerProfileNames -Root $root) {
         $userConfig = Join-Path $env:APPDATA (Join-Path $profileName "Extension\Media\PlayParse\yt-dlp.ini")
@@ -153,6 +180,7 @@ try {
         $text = Get-Content -LiteralPath $userConfig -Raw
         $liveChat = Get-IniValue -Text $text -Name "live_chat"
         $reduceFormats = Get-IniValue -Text $text -Name "reduce_formats"
+        $criticalError = Get-IniValue -Text $text -Name "critical_error"
 
         Write-Host "User config: $userConfig"
         if ($liveChat -eq "0") {
@@ -167,6 +195,16 @@ try {
         }
         else {
             Write-Host "[WARN] reduce_formats=$reduceFormats (recommended: 1)" -ForegroundColor Yellow
+        }
+
+        if ($criticalError -eq "0") {
+            Write-Host "[OK] critical_error=0" -ForegroundColor Green
+        }
+        elseif ($criticalError -eq "") {
+            Write-Host "[OK] critical_error=0 (default)" -ForegroundColor Green
+        }
+        else {
+            Write-Host "[WARN] critical_error=$criticalError (recommended: 0)" -ForegroundColor Yellow
         }
     }
 }

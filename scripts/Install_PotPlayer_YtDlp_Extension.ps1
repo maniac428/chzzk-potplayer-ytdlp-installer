@@ -179,6 +179,112 @@ function Set-IniValue {
     return $Text.TrimEnd() + "`r`n$Name=$Value`r`n"
 }
 
+function Patch-YtDlpExtensionLogOrder {
+    param([string]$ExtensionPath)
+
+    if (-not (Test-Path -LiteralPath $ExtensionPath -PathType Leaf)) {
+        throw "yt-dlp extension file was not found: $ExtensionPath"
+    }
+
+    $text = Get-Content -LiteralPath $ExtensionPath -Raw
+    if ($text -match 'tx\.findI\(log, "\[debug\] Command-line config:"\) < 0 && tx\.findI\(output, "\[debug\] Command-line config:"\) >= 0') {
+        Write-Ok "yt-dlp log-order compatibility patch already present."
+    }
+    else {
+        $old = "`t`tstring log = output.substr(logPos).TrimLeft(`"\r\n`");`r`n`t`t`r`n`t`tif (cfg.csl == 1)"
+        $new = "`t`tstring log = output.substr(logPos).TrimLeft(`"\r\n`");`r`n`t`tif (tx.findI(log, `"[debug] Command-line config:`") < 0 && tx.findI(output, `"[debug] Command-line config:`") >= 0)`r`n`t`t{`r`n`t`t`tlog = output;`r`n`t`t}`r`n`t`t`r`n`t`tif (cfg.csl == 1)"
+
+        $patched = $text.Replace($old, $new)
+        if ($patched -eq $text) {
+            $old = "`t`tstring log = output.substr(logPos).TrimLeft(`"\r\n`");`n`t`t`n`t`tif (cfg.csl == 1)"
+            $new = "`t`tstring log = output.substr(logPos).TrimLeft(`"\r\n`");`n`t`tif (tx.findI(log, `"[debug] Command-line config:`") < 0 && tx.findI(output, `"[debug] Command-line config:`") >= 0)`n`t`t{`n`t`t`tlog = output;`n`t`t}`n`t`t`n`t`tif (cfg.csl == 1)"
+            $patched = $text.Replace($old, $new)
+        }
+
+        if ($patched -eq $text) {
+            throw "Could not patch yt-dlp extension log-order handling."
+        }
+
+        $text = $patched
+        Write-Ok "Applied yt-dlp log-order compatibility patch."
+    }
+
+    if ($text -match 'data\.find\("}\\r\\n", pos1\)') {
+        Write-Ok "yt-dlp JSON line-ending compatibility patch already present."
+    }
+    else {
+        $old = "`t`t`t`tint pos2 = data.find(`"}`\n`", pos1);`r`n`t`t`t`tif (pos2 < 0) break;"
+        $new = "`t`t`t`tint pos2 = data.find(`"}`\n`", pos1);`r`n`t`t`t`tif (pos2 < 0) pos2 = data.find(`"}`\r\n`", pos1);`r`n`t`t`t`tif (pos2 < 0 && data.Right(1) == `"}`") pos2 = data.length() - 1;`r`n`t`t`t`tif (pos2 < 0) break;"
+
+        $patched = $text.Replace($old, $new)
+        if ($patched -eq $text) {
+            $old = "`t`t`t`tint pos2 = data.find(`"}`\n`", pos1);`n`t`t`t`tif (pos2 < 0) break;"
+            $new = "`t`t`t`tint pos2 = data.find(`"}`\n`", pos1);`n`t`t`t`tif (pos2 < 0) pos2 = data.find(`"}`\r\n`", pos1);`n`t`t`t`tif (pos2 < 0 && data.Right(1) == `"}`") pos2 = data.length() - 1;`n`t`t`t`tif (pos2 < 0) break;"
+            $patched = $text.Replace($old, $new)
+        }
+
+        if ($patched -eq $text) {
+            throw "Could not patch yt-dlp extension JSON line-ending handling."
+        }
+
+        $text = $patched
+        Write-Ok "Applied yt-dlp JSON line-ending compatibility patch."
+    }
+
+    if ($text -match 'bool _IsTwitchStreamlinkHlsUrl\(string url\)') {
+        Write-Ok "Twitch Streamlink HLS/local HTTP passthrough patch already present."
+    }
+    else {
+        $helper = @'
+bool _IsTwitchStreamlinkHlsUrl(string url)
+{
+	url.MakeLower();
+	if (url.find("hls://") == 0) return true;
+	if (HostRegExpParse(url, "^https?://(?:127\\.0\\.0\\.1|localhost|\\[::1\\])(?::\\d+)?", {})) return true;
+	if (url.find("ttvnw.net") < 0) return false;
+	if (url.find(".m3u8") >= 0) return true;
+	return false;
+}
+
+
+'@
+        $old = "bool _PlayitemCheckBase(string url)"
+        $patched = $text.Replace($old, $helper + $old)
+        if ($patched -eq $text) {
+            throw "Could not patch Twitch Streamlink HLS/local HTTP passthrough helper."
+        }
+
+        $old = "string url = _ReviseUrl(path);`r`n`t`r`n`tif (!_PlayitemCheckBase(url))"
+        $new = "string url = _ReviseUrl(path);`r`n`tif (_IsTwitchStreamlinkHlsUrl(url)) return false;`r`n`t`r`n`tif (!_PlayitemCheckBase(url))"
+        $patched2 = $patched.Replace($old, $new)
+        if ($patched2 -eq $patched) {
+            $old = "string url = _ReviseUrl(path);`n`t`n`tif (!_PlayitemCheckBase(url))"
+            $new = "string url = _ReviseUrl(path);`n`tif (_IsTwitchStreamlinkHlsUrl(url)) return false;`n`t`n`tif (!_PlayitemCheckBase(url))"
+            $patched2 = $patched.Replace($old, $new)
+        }
+        if ($patched2 -eq $patched) {
+            throw "Could not patch PlaylistCheck Twitch Streamlink HLS/local HTTP passthrough."
+        }
+
+        $old = "string url = _ReviseUrl(path);`r`n`turl.MakeLower();`r`n`t`r`n`tif (!_PlayitemCheckBase(url))"
+        $new = "string url = _ReviseUrl(path);`r`n`turl.MakeLower();`r`n`tif (_IsTwitchStreamlinkHlsUrl(url)) return false;`r`n`t`r`n`tif (!_PlayitemCheckBase(url))"
+        $patched3 = $patched2.Replace($old, $new)
+        if ($patched3 -eq $patched2) {
+            $old = "string url = _ReviseUrl(path);`n`turl.MakeLower();`n`t`n`tif (!_PlayitemCheckBase(url))"
+            $new = "string url = _ReviseUrl(path);`n`turl.MakeLower();`n`tif (_IsTwitchStreamlinkHlsUrl(url)) return false;`n`t`n`tif (!_PlayitemCheckBase(url))"
+            $patched3 = $patched2.Replace($old, $new)
+        }
+        if ($patched3 -eq $patched2) {
+            throw "Could not patch PlayitemCheck Twitch Streamlink HLS/local HTTP passthrough."
+        }
+
+        $text = $patched3
+        Write-Ok "Applied Twitch Streamlink HLS/local HTTP passthrough patch."
+    }
+
+    Set-Content -LiteralPath $ExtensionPath -Value $text -Encoding UTF8
+}
+
 function Get-PotPlayerProfileNames {
     param([string]$Root)
 
@@ -226,9 +332,10 @@ function Set-ChzzkViewingDefaults {
         $text = Get-Content -LiteralPath $userConfig -Raw
         $text = Set-IniValue -Text $text -Name "live_chat" -Value "0"
         $text = Set-IniValue -Text $text -Name "reduce_formats" -Value "1"
+        $text = Set-IniValue -Text $text -Name "critical_error" -Value "0"
         Set-Content -LiteralPath $userConfig -Value $text -Encoding UTF8
 
-        Write-Ok "Applied Chzzk viewing defaults: live_chat=0, reduce_formats=1"
+        Write-Ok "Applied Chzzk viewing defaults: live_chat=0, reduce_formats=1, critical_error=0"
         Write-Info "User config: $userConfig"
     }
 }
@@ -294,6 +401,7 @@ try {
         Download-FileChecked -Url $file.Url -Destination $file.Destination -MinBytes $file.MinBytes
     }
 
+    Patch-YtDlpExtensionLogOrder -ExtensionPath (Join-Path $playParseDir "MediaPlayParse - yt-dlp.as")
     Set-ChzzkViewingDefaults -Root $root -BackupRoot $backupRoot
 
     $ytDlpExe = Join-Path $moduleDir "yt-dlp.exe"

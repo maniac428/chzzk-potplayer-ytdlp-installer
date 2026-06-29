@@ -46,7 +46,10 @@ https://chzzk.naver.com/video/...
 - `MediaPlayParse - yt-dlp.as`
 - `yt-dlp_default.ini` 및 보조 파일
 - 최신 `yt-dlp.exe`
-- 치지직 시청용 기본값: `live_chat=0`, `reduce_formats=1`
+- 치지직 시청용 기본값: `live_chat=0`, `reduce_formats=1`, `critical_error=0`
+- 최신 `yt-dlp` 로그 순서 호환 패치
+- Windows 줄바꿈 환경의 `yt-dlp` JSON 파싱 호환 패치
+- Twitch Streamlink HLS/로컬 HTTP 주소 통과 패치
 - 기존 파일 자동 백업
 
 ### 주의
@@ -55,7 +58,7 @@ https://chzzk.naver.com/video/...
 - 그리드 프로그램 없이 보는 대안이 될 수 있지만, 로그인, 성인 인증, 지역 제한, 사이트 정책 변경이 있으면 실패할 수 있습니다.
 - "광고 없이 보기"는 PotPlayer로 직접 열 때 웹 플레이어 광고 화면이나 UI를 피할 수 있다는 뜻입니다. 모든 광고를 영구 차단한다고 보장하는 도구는 아닙니다.
 - 방송 자체가 특정 화질까지만 제공하면 PotPlayer에서도 그 이상으로 올라가지 않습니다.
-- Twitch 720p/source quality 문제는 별도 프로젝트를 사용하세요.
+- Twitch 720p/source quality 문제는 별도 프로젝트를 사용하세요. 이 설치기는 해당 프로젝트의 Streamlink HLS/로컬 HTTP 주소를 yt-dlp 확장이 가로채지 않도록만 처리합니다.
 
 ### 설치 위치
 
@@ -108,7 +111,10 @@ Run `update-potplayer-ytdlp.cmd` to update, or `check-potplayer-ytdlp.cmd` to ch
 - `MediaPlayParse - yt-dlp.as`
 - `yt-dlp_default.ini` and helper files
 - Latest `yt-dlp.exe`
-- Chzzk viewing defaults: `live_chat=0`, `reduce_formats=1`
+- Chzzk viewing defaults: `live_chat=0`, `reduce_formats=1`, `critical_error=0`
+- Compatibility patch for recent `yt-dlp` log ordering
+- Compatibility patch for `yt-dlp` JSON parsing with Windows line endings
+- Passthrough patch for Twitch Streamlink HLS/local HTTP URLs
 - Automatic backup of existing files
 
 ### Notes
@@ -117,7 +123,7 @@ Run `update-potplayer-ytdlp.cmd` to update, or `check-potplayer-ytdlp.cmd` to ch
 - It can be a no-grid external-player alternative, but login, adult, region, or site policy restrictions may still fail.
 - "No ads" means opening directly in PotPlayer may avoid web-player ad screens or UI in some setups. It is not a guaranteed permanent ad blocker.
 - PotPlayer cannot exceed the quality actually provided by the stream.
-- Use the separate Twitch project for Twitch 720p/source-quality issues.
+- Use the separate Twitch project for Twitch 720p/source-quality issues. This installer only prevents PotPlayer's yt-dlp extension from intercepting that project's Streamlink HLS/local HTTP URLs.
 
 ## Sources
 
